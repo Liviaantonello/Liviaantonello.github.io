@@ -14,7 +14,7 @@
         .nav-card { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid #334155; text-decoration: none; color: white; transition: 0.3s; }
         .nav-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
         .nav-card h2 { color: var(--accent); margin-top: 0; }
-        footer { padding: 40px; color: #64748b; font-size: 0.9rem; }
+        footer { padding: 40px; color: #64748b; font-size: 0.9rem; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -40,39 +40,3 @@
     <footer>© 2026 Livia Antonello | Built with Code</footer>
 </body>
 </html>
-    <section class="project-detail">
-        <div class="project-content">
-            <span class="tag">Featured Project</span>
-            <h2>Smart Remote-Controlled Vehicle</h2>
-            <p>A sophisticated mobile platform featuring Bluetooth connectivity and autonomous obstacle avoidance logic.</p>
-            
-            <h3>How it works:</h3>
-            <p>The system uses an <strong>HC-06 module</strong> to receive serial commands. A custom algorithm processes distance data from an <strong>HC-SR04 ultrasonic sensor</strong> to prevent crashes by overriding manual controls in real-time.</p>
-
-            <div class="code-snippet">
-                // Safety Override Logic Snippet<br>
-                distance = readUltrasonic();<br>
-                if (distance < 20) {<br>
-                &nbsp;&nbsp;stopMotors(); // Immediate override<br>
-                &nbsp;&nbsp;playWarningBeep();<br>
-                }
-            </div>
-
-            <h3>Key Hardware:</h3>
-            <ul>
-                <li>Atmega328P (Arduino Uno)</li>
-                <li>HC-06 Bluetooth Module</li>
-                <li>HC-SR04 Ultrasonic Sensor</li>
-                <li>High-Torque Servos</li>
-            </ul>
-        </div>
-    </section>
-
-    <footer>
-        <p>Built by Livia Antonello © 2026</p>
-    </footer>
-</div>
-
-</body>
-</html>
-
