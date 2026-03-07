@@ -1,28 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Simulink Models | Livia Antonello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control & Modelling | Livia Antonello</title>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; }
-        .container { max-width: 800px; margin: auto; }
-        .model-card { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #334155; }
-        img { width: 100%; border-radius: 8px; margin-top: 15px; }
-        .back { color: #38bdf8; text-decoration: none; }
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; --secondary: #94a3b8; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        header { padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 40px; }
+        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; }
+        h1 { font-size: 2.5rem; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .status-badge { background: #f59e0b20; color: #f59e0b; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid #f59e0b; display: inline-block; margin-bottom: 20px; }
+        .description-box { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 30px; }
+        h2 { color: var(--accent); }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 15px; }
+        .skill-tag { display: inline-block; background: #38bdf810; border: 1px solid var(--accent); color: var(--accent); padding: 3px 10px; border-radius: 5px; font-size: 0.8rem; margin: 2px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back">← Back to Home</a>
-        <h1>Control System Simulations</h1>
-        <p>Motor control models and feedback loop analysis using MATLAB & Simulink.</p>
 
-        <div class="model-card">
-            <h3>PID Motor Control</h3>
-            <p>Closed-loop simulation to optimize transient response and stability.</p>
-            <img src="model1.png" alt="Simulink Model Screenshot">
-            
+<div class="container">
+    <header>
+        <a href="index.html" class="back-link">← Torna alla Home</a>
+        <h1>Modellazione e Controllo</h1>
+    </header>
+
+    <div class="status-badge">🚀 Progetti in corso: Esame di Modellazione e Controllo delle Macchine Elettriche</div>
+
+    <section class="description-box">
+        <h2>Esperienza in Simulink & MATLAB</h2>
+        <p>Attualmente sto approfondendo lo studio e la modellazione dinamica delle macchine elettriche, sviluppando modelli di controllo avanzati per motori in corrente continua e alternata.</p>
+        
+        <ul>
+            <li><strong>Modellazione di Macchine Elettriche:</strong> Implementazione di modelli matematici per motori DC e macchine asincrone/sincrone, analizzando il comportamento dinamico in diverse condizioni di carico.</li>
+            <li><strong>Sistemi di Controllo:</strong> Progettazione di anelli di controllo (corrente, velocità, posizione) con taratura di regolatori PID e analisi della stabilità nel dominio della frequenza.</li>
+            <li><strong>Analisi dei Sistemi:</strong> Utilizzo di MATLAB per l'elaborazione dati e Simulink per la validazione dei modelli tramite simulazione numerica.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Competenze Tecniche</h2>
+        <div>
+            <span class="skill-tag">Model-Based Design</span>
+            <span class="skill-tag">Feedback Control</span>
+            <span class="skill-tag">State-Space Analysis</span>
+            <span class="skill-tag">Electric Drives</span>
+            <span class="skill-tag">Transfer Functions</span>
         </div>
-    </div>
+    </section>
+
+    <footer>
+        <p>Portfolio di Livia Antonello © 2026</p>
+    </footer>
+</div>
+
 </body>
 </html>
