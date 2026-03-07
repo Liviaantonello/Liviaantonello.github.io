@@ -3,62 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control & Modelling | Livia Antonello</title>
+    <title>Modelling & Control | Livia Antonello</title>
     <style>
         :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; --secondary: #94a3b8; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
         header { padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 40px; }
-        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; }
-        h1 { font-size: 2.5rem; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .status-badge { background: #f59e0b20; color: #f59e0b; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid #f59e0b; display: inline-block; margin-bottom: 20px; }
-        .description-box { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 30px; }
-        h2 { color: var(--accent); }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 15px; }
-        .skill-tag { display: inline-block; background: #38bdf810; border: 1px solid var(--accent); color: var(--accent); padding: 3px 10px; border-radius: 5px; font-size: 0.8rem; margin: 2px; }
+        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        h1 { font-size: 2.5rem; margin-top: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .status-badge { background: #f59e0b20; color: #f59e0b; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; border: 1px solid #f59e0b; display: inline-block; margin-bottom: 30px; }
+        
+        .project-card { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 40px; }
+        .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        img { width: 100%; border-radius: 8px; border: 1px solid var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .full-img { width: 100%; max-width: 700px; display: block; margin: 20px auto; }
+        
+        h2, h3 { color: var(--accent); }
+        ul { padding-left: 20px; color: var(--secondary); }
+        li { margin-bottom: 10px; }
+        .skill-tag { display: inline-block; background: #38bdf810; border: 1px solid var(--accent); color: var(--accent); padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; margin: 4px; }
+        
+        footer { text-align: center; padding: 40px 0; color: var(--secondary); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <a href="index.html" class="back-link">← Back to Home</a>
+        <a href="index.html" class="back-link">← Back to Portfolio Home</a>
         <h1>Modelling & Control Systems</h1>
+        <div style="margin-top: 15px;">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Simulink</span>
+            <span class="skill-tag">Control Theory</span>
+            <span class="skill-tag">Electrical Machines</span>
+        </div>
     </header>
 
     <div class="status-badge">🚀 Current Focus: Advanced Modelling and Control of Electrical Machines</div>
 
-    <section class="description-box">
+    <section class="project-card">
         <h2>Simulink & MATLAB Expertise</h2>
         <p>
-            I specialize in the dynamic modelling of electrical machines, developing high-performance control strategies for both DC and AC motors. My work focuses on bridging theoretical control laws with practical numerical validation.
+            Development of dynamic models for synchronous and asynchronous machines. Conducted in-depth stability analysis and implemented control strategies, including V/f and Field Oriented Control (FOC). Leveraged Simulink to validate system response to transients and load variations, optimizing PID regulator parameters for enhanced performance.
         </p>
-        
+    </section>
+
+    <section class="project-card">
+        <h3>Example 1: Induction Machine Starting Methods</h3>
+        <p>
+            Comparative analysis of various starting techniques for asynchronous machines to evaluate current peaks and torque dynamics.
+        </p>
+        <div class="image-grid">
+            <img src="avviamento1.jpg" alt="Starting Model Part 1">
+            <img src="avviamento2.jpg" alt="Starting Model Part 2">
+        </div>
         <ul>
-            <li><strong>Electrical Machine Modelling:</strong> Development of dynamic mathematical models for <strong>synchronous and asynchronous machines</strong>. I analyze system behavior under various load conditions and transients.</li>
-            <li><strong>Control Strategies:</strong> Implementation of advanced control techniques, including <strong>Scalar Control (V/f)</strong> and <strong>Field Oriented Control (FOC)</strong>.</li>
-            <li><strong>System Optimization:</strong> Conducted in-depth stability analysis in the frequency domain. I leverage Simulink to optimize <strong>PID regulator parameters</strong>, ensuring fast response and minimal overshoot during transients.</li>
-            <li><strong>Numerical Validation:</strong> Utilizing MATLAB for data processing and Simulink for validating system response to load variations and disturbances.</li>
+            <li>Implementation of <strong>Star-Delta (Y-Δ)</strong> and <strong>Autotransformer</strong> starters.</li>
+            <li>Simulation of <strong>Rotor Rheostat</strong> starting for wound-rotor motors.</li>
+            <li>Comparison with <strong>Direct-on-Line (DOL)</strong> and Inverter-driven starts.</li>
         </ul>
     </section>
 
-    [Image of Field Oriented Control (FOC) block diagram for permanent magnet synchronous motor]
+    
 
-    <section>
+    <section class="project-card">
+        <h3>Example 2: Inverter-based Dynamic Braking</h3>
+        <p>
+            Modelling of a braking sequence for an asynchronous machine controlled by a power inverter.
+        </p>
+        <img src="frenatura1.jpg" alt="Braking Simulation" class="full-img">
+        <ul>
+            <li>Dynamic frequency ramp-down management.</li>
+            <li>Analysis of energy dissipation and inverter modulation during transients.</li>
+        </ul>
+    </section>
+
+    
+
+    <section style="text-align: center; margin-top: 50px;">
         <h2>Technical Core</h2>
-        <div>
-            <span class="skill-tag">Model-Based Design (MBD)</span>
+        <div style="max-width: 600px; margin: 0 auto;">
             <span class="skill-tag">Field Oriented Control (FOC)</span>
             <span class="skill-tag">V/f Control</span>
-            <span class="skill-tag">PID Tuning</span>
-            <span class="skill-tag">Dynamic Systems Analysis</span>
             <span class="skill-tag">Park & Clarke Transforms</span>
+            <span class="skill-tag">PID Tuning</span>
+            <span class="skill-tag">Dynamic Modelling</span>
+            <span class="skill-tag">Power Electronics Simulation</span>
         </div>
     </section>
 
     <footer>
-        <p>Portfolio by Livia Antonello © 2026</p>
+        <p>Modelling & Control Projects | Livia Antonello © 2026</p>
     </footer>
 </div>
 
