@@ -2,25 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Arduino Car | Livia Antonello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino RC Car | Livia Antonello</title>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; line-height: 1.6; }
-        .container { max-width: 800px; margin: auto; }
-        img { width: 100%; border-radius: 15px; border: 2px solid #38bdf8; margin: 20px 0; }
-        pre { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; }
-        .back { color: #38bdf8; text-decoration: none; display: block; margin-bottom: 20px; }
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; --secondary: #94a3b8; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Header & Navigation */
+        header { padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 40px; }
+        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { font-size: 2.5rem; margin-top: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Project Content */
+        .project-image { width: 100%; max-width: 600px; display: block; margin: 0 auto 30px auto; border-radius: 12px; border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15); }
+        .description { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 30px; }
+        .tag { display: inline-block; background: #38bdf820; color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; margin-right: 10px; margin-bottom: 10px; border: 1px solid var(--accent); }
+        
+        h2, h3 { color: var(--accent); }
+        ul { padding-left: 20px; color: var(--secondary); }
+        li { margin-bottom: 10px; }
+
+        /* Code Block */
+        pre { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; border: 1px solid #22c55e33; }
+        
+        footer { text-align: center; padding: 40px 0; color: var(--secondary); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back">← Back to Home</a>
-        <h1>Bluetooth & Obstacle Avoidance Car</h1>
-        <p>A dual-mode vehicle that switches between manual Bluetooth control and fully autonomous sensor-based navigation.</p>
-        
-        <img src="macchina.jpg" alt="Arduino Car Hardware">
-        
 
-        <h2>The Code (C++)</h2>
+<div class="container">
+    <header>
+        <a href="index.html" class="back-link">← Back to Portfolio Home</a>
+        <h1>Bluetooth & Obstacle Avoidance Vehicle</h1>
+        <div style="margin-top: 10px;">
+            <span class="tag">Arduino Uno</span>
+            <span class="tag">C++ / Embedded C</span>
+            <span class="tag">HC-06 Bluetooth</span>
+            <span class="tag">HC-SR04 Ultrasonic Sensor</span>
+            <span class="tag">PWM Servo Control</span>
+        </div>
+    </header>
+
+    <img src="macchina.jpg" alt="Arduino Car Hardware Setup" class="project-image">
+    
+
+    <section class="description">
+        <h2>Project Overview</h2>
+        <p>I developed a fully functional remote-controlled vehicle based on the Arduino platform. This project bridges hardware integration with real-time software logic to create a versatile mobile robot.</p>
+        
+        <h3>Key Features:</h3>
+        <ul>
+            <li><strong>Dual Operating Modes:</strong> Seamlessly switch between manual control via a smartphone app (Mode 1) and fully autonomous navigation (Mode 2).</li>
+            <li><strong>Wireless Communication:</strong> Integrated the HC-06 Bluetooth module to establish a robust serial command link for manual driving.</li>
+            <li><strong>Servo Drivetrain:</strong> Managed independent continuous rotation servos via PWM signals for precise velocity and directional control (skid steering).</li>
+            <li><strong>Collision Avoidance System:</strong> Implemented a real-time safety layer using an ultrasonic distance sensor. In autonomous mode, the robot detects obstacles and executes evasive maneuvers.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Control Firmware (C++)</h2>
+        <p>This snippet demonstrates the main loop structure, showcasing how data is parsed from the serial Bluetooth module and how the obstacle avoidance logic is implemented using non-blocking sensor readings.</p>
+        
         <pre>
 //scrivere un codice che se mandi dal seriale bluetooth 1 va col bluetooth, se mandi 2 va con il sensore a ultrasuoni
 
@@ -116,7 +160,16 @@ delay(20);
 }
 
 
+
+// Ricordati di sostituire '<' con '&lt;' e '>' con '&gt;' se li usi nei commenti o nelle include
         </pre>
-    </div>
+    </section>
+
+    <footer>
+        <p>Documentation and hardware by Livia Antonello © 2026</p>
+    </footer>
+</div>
+
 </body>
+</html>
 </html>
