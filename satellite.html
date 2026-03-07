@@ -2,24 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satellite Tracker | Livia Antonello</title>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; }
-        .container { max-width: 900px; margin: auto; }
-        .code-block { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: monospace; margin: 20px 0; }
-        h2 { color: #38bdf8; }
-        .back { color: #38bdf8; text-decoration: none; }
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; --secondary: #94a3b8; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 40px; }
+        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        h1 { font-size: 2.5rem; margin-top: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .description-box { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 30px; }
+        .tag { display: inline-block; background: #38bdf820; color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; margin-right: 10px; margin-bottom: 10px; border: 1px solid var(--accent); }
+        
+        h2 { color: var(--accent); margin-top: 40px; }
+        .code-box { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; border: 1px solid #22c55e33; position: relative; }
+        .code-label { position: absolute; top: 0; right: 20px; background: #334155; color: #fff; padding: 2px 10px; border-radius: 0 0 5px 5px; font-size: 0.7rem; text-transform: uppercase; }
+        
+        footer { text-align: center; padding: 40px 0; color: var(--secondary); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back">← Back to Home</a>
-        <h1>Satellite Tracking System (Gpredict Bridge)</h1>
-        <p>A custom solution to emulate high-end satellite rotators using a Raspberry Pi.</p>
 
-        <h2>🐍 Python Bridge (Emulator)</h2>
-        <div class="code-block">
-            <pre># import socket
+<div class="container">
+    <header>
+        <a href="index.html" class="back-link">← Back to Portfolio Home</a>
+        <h1>Raspberry Pi Satellite Tracking System</h1>
+        <div style="margin-top: 10px;">
+            <span class="tag">Raspberry Pi</span>
+            <span class="tag">Python</span>
+            <span class="tag">C++</span>
+            <span class="tag">Gpredict</span>
+            <span class="tag">TLE Processing</span>
+            <span class="tag">Servo Automation</span>
+        </div>
+    </header>
+
+    <section class="description-box">
+        <h2>Project Overview</h2>
+        <p>
+            I developed a satellite tracking system using a <strong>Raspberry Pi</strong> to automate a servo-mechanism. 
+            The system solves a common challenge in amateur radio: professional rotators are extremely expensive.
+        </p>
+        <p>
+            The TLEs (Two-Line Elements) are retrieved from <strong>Gpredict</strong> via custom Python code. Since Gpredict is designed to communicate only with official rotators, I developed a software interface that emulates the expected hardware protocol, allowing the software to "see" my system as a standard rotator.
+        </p>
+        <p>
+            A dedicated <strong>C++ backend</strong> receives the TLE data from the Python bridge and executes real-time PWM control for the servos. The system manages the entire trajectory across the skyline, from AOS (Acquisition of Signal) to LOS (Loss of Signal).
+        </p>
+    </section>
+
+    
+
+    <section>
+        <h2>Software Implementation</h2>
+        
+        <div class="code-box">
+            <div class="code-label">Python (Bridge)</div>
+            <pre>
+import socket
 
 HOST = "0.0.0.0"
 PORT = 4533
@@ -86,12 +128,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                 except Exception as e:
                     print(f"[ERRORE CONNESSIONE]: {e}")
                     break
-</pre>
+            </pre>
         </div>
 
-        <h2>⚙️ C++ Servo Controller</h2>
-        <div class="code-block">
-            <pre>// #include <iostream>
+        <div class="code-box">
+            <div class="code-label">C++ (Servo Control)</div>
+            <pre>
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <pigpio.h>
@@ -194,8 +237,15 @@ int main() {
     return 0;
 }
 
-</pre>
+
+            </pre>
         </div>
-    </div>
+    </section>
+
+    <footer>
+        <p>Satellite Tracking Project | Livia Antonello © 2026</p>
+    </footer>
+</div>
+
 </body>
 </html>
