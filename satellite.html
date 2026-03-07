@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Satellite Tracker | Livia Antonello</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; }
+        .container { max-width: 900px; margin: auto; }
+        .code-block { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: monospace; margin: 20px 0; }
+        h2 { color: #38bdf8; }
+        .back { color: #38bdf8; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Back to Home</a>
+        <h1>Satellite Tracking System (Gpredict Bridge)</h1>
+        <p>A custom solution to emulate high-end satellite rotators using a Raspberry Pi.</p>
+
+        <h2>🐍 Python Bridge (Emulator)</h2>
+        <div class="code-block">
+            <pre># import socket
+
+HOST = "0.0.0.0"
+PORT = 4533
+
+azimuth = 0.0
+elevation = 0.0
+
+print(f"[INFO] Rotator TCP server avviato su {HOST}:{PORT} (protocollo rotctld minimal)")
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server.bind((HOST, PORT))
+    server.listen()
+
+    while True:
+        conn, addr = server.accept()
+        print(f"[INFO] Connessione da {addr}")
+        with conn:
+            while True:
+                try:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
+                    command = data.decode().strip()
+                    print(f"[RX] {command}")
+
+                    if command.lower() == 'p':
+                        response = f"{azimuth:.2f}\n{elevation:.2f}\n"
+                        conn.sendall(response.encode())
+                        print(f"[TX] {response.strip()}")
+
+                    elif command.startswith('P '):
+                        try:
+                            _, az_str, el_str = command.split()
+                            azimuth = float(az_str)
+                            elevation = float(el_str)
+                            print(f"[INFO] Puntamento aggiornato: AZ={azimuth}, EL={elevation}")
+
+                            # ? Aggiorna file in tempo reale
+                            with open("last_command.txt", "w") as f:
+                                f.write(f"{azimuth:.2f},{elevation:.2f}\n")
+                            with open("log_comandi.csv", "a") as log:
+                                log.write(f"{azimuth:.2f},{elevation:.2f}\n")
+
+                            conn.sendall(b"RPRT 0\n")
+                        except Exception as e:
+                            print(f"[ERRORE PARSE]: {e}")
+                            conn.sendall(b"RPRT -1\n")
+
+                    elif command.upper() == 'S':
+                        conn.sendall(b"RPRT 0\n")
+
+                    elif command.lower() == 'v':
+                        conn.sendall(b"rotctld LiviaPi 0.1\n")
+
+                    elif command.lower() == 'q':
+                        print("[INFO] Chiusura richiesta da client")
+                        break
+
+                    else:
+                        conn.sendall(b"RPRT -1\n")
+                        print(f"[IGNORATO] Comando sconosciuto: {command}")
+
+                except Exception as e:
+                    print(f"[ERRORE CONNESSIONE]: {e}")
+                    break
+</pre>
+        </div>
+
+        <h2>⚙️ C++ Servo Controller</h2>
+        <div class="code-block">
+            <pre>// #include <iostream>
+#include <fstream>
+#include <string>
+#include <pigpio.h>
+#include <unistd.h>
+#include <cmath>
+#include <chrono>
+#include <thread>
+
+using namespace std;
+
+// ---------- Parametri servo ----------
+static const int SERVO_GPIO = 18;
+// Range tipico: 1000?2000 us. Se il tuo servo supporta 500?2500, aggiorna qui.
+static const int SERVO_MIN_US = 1000;
+static const int SERVO_MAX_US = 2000;
+
+// Deadband per ridurre aggiornamenti inutili (in gradi)
+static const double ANGLE_TOL = 0.6;
+
+// ---------- Utility ----------
+bool readSatelliteData(const string& filename, double& az, double& el) {
+    ifstream file(filename);
+    if (!file.is_open()) return false;
+
+    string line;
+    if (!getline(file, line)) return false;
+
+    size_t commaPos = line.find(',');
+    if (commaPos == string::npos) return false;
+
+    try {
+        az = stod(line.substr(0, commaPos));
+        el = stod(line.substr(commaPos + 1));
+    } catch (...) {
+        return false;
+    }
+    return true;
+}
+
+// Converte gradi [0..180] -> microsecondi per pigpio
+int angleToPulseWidth(double angleDeg) {
+    if (angleDeg < 0)   angleDeg = 0;
+    if (angleDeg > 180) angleDeg = 180;
+    double ratio = angleDeg / 180.0;
+    int us = static_cast<int>(SERVO_MIN_US + ratio * (SERVO_MAX_US - SERVO_MIN_US));
+    return us;
+}
+
+// Normalizza azimuth 0..360 e mappa a 0..180 (servo half-turn).
+double mapAzToServo180(double azDeg) {
+    // porta in [0,360)
+    double a = fmod(azDeg, 360.0);
+    if (a < 0) a += 360.0;
+
+    // mappa in [0,180]: 0..180 -> stesso angolo; 180..360 -> angolo-180 (wrap)
+    if (a <= 180.0) return a;
+    return a - 180.0;
+}
+
+int main() {
+    if (gpioInitialise() < 0) {
+        cerr << "Errore inizializzazione pigpio.\n";
+        return 1;
+    }
+
+    const string filename = "/home/polispacegs/last_command.txt";
+
+    // Porta il servo in posizione neutra (90°) all?avvio
+    gpioServo(SERVO_GPIO, angleToPulseWidth(90.0));
+
+    double az = 0.0, el = 0.0;
+    double lastCmdAngle = -1.0; // invalido per forzare primo set
+
+    while (true) {
+        if (!readSatelliteData(filename, az, el)) {
+            // Se non riesco a leggere, mantengo la posizione attuale
+            this_thread::sleep_for(chrono::milliseconds(200));
+            continue;
+        }
+
+        // Con servo 180° seguiamo direttamente la posizione target
+        double targetAngle = mapAzToServo180(az);
+
+        // Evita comandi se la variazione è piccola (jitter)
+        if (lastCmdAngle < 0 || fabs(targetAngle - lastCmdAngle) > ANGLE_TOL) {
+            int pw = angleToPulseWidth(targetAngle);
+            gpioServo(SERVO_GPIO, pw);
+
+            cout << "AZ target: " << az
+                 << " -> servoAngle: " << targetAngle
+                 << " -> pulse: " << pw << " us" << endl;
+
+            lastCmdAngle = targetAngle;
+        }
+
+        this_thread::sleep_for(chrono::milliseconds(100));
+    }
+
+    gpioTerminate();
+    return 0;
+}
+
+</pre>
+        </div>
+    </div>
+</body>
+</html>
