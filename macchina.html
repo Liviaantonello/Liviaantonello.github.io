@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arduino Car | Livia Antonello</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; }
+        img { width: 100%; border-radius: 15px; border: 2px solid #38bdf8; margin: 20px 0; }
+        pre { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; }
+        .back { color: #38bdf8; text-decoration: none; display: block; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Back to Home</a>
+        <h1>Bluetooth & Obstacle Avoidance Car</h1>
+        <p>A dual-mode vehicle that switches between manual Bluetooth control and fully autonomous sensor-based navigation.</p>
+        
+        <img src="macchina.jpg" alt="Arduino Car Hardware">
+        
+
+        <h2>The Code (C++)</h2>
+        <pre>
+//scrivere un codice che se mandi dal seriale bluetooth 1 va col bluetooth, se mandi 2 va con il sensore a ultrasuoni
+
+#include <Servo.h> //includi la libreria del servo
+
+int ServoPinBL = 10; //il pin da cui mandi il PWM per le ruote di sinistra back
+int ServoPinFL=11;  //il pin da cui mandi i PWM per le ruote di sinistra avanti
+int ServoPinFR=3;
+int ServoPinBR=5;
+Servo ruotaFR;  //nome alla ruota davanti a destra
+Servo ruotaFL; //nome alla ruota davanti a sinistra
+Servo ruotaBR; //B sta per back
+Servo ruotaBL; 
+
+char stop='stop';
+char avanti='go';
+char indietro='back';
+char sinistra = 'sin';
+char destra = 'dx';
+char command='0'; //andrebbe s lol
+
+ 
+void setup() {
+  // put your setup code here, to run once:
+ruotaFR.attach(ServoPinFR); //per dire che la ruota front right è attaccata al pin 3
+ruotaBR.attach(ServoPinBR);
+ruotaFL.attach(ServoPinFL);
+ruotaBL.attach(ServoPinBL);
+ruotaFR.write(90);
+ruotaFL.write(90);
+ruotaBR.write(90);
+ruotaBL.write(90);
+Serial.begin(9600);
+}
+
+void loop(){
+if (Serial.available() > 0) { //condizione che controlla se ci sono dati 
+//in arrivo dal modulo seriale (ad esempio, dal modulo Bluetooth HC-06 o dal monitor seriale del PC).
+//dentro le parentesi di serial.available non va nulla perchè devi solo chiamarla
+command=Serial.read(); //anche qua stai solo chiamando la funzione per leggere
+Serial.print(command);
+
+if (command == avanti){
+  ruotaFR.write(40);
+  ruotaBR.write(40);
+  ruotaFL.write(150);
+  ruotaBL.write(150);
+  Serial.println("Go");
+}
+
+else if (command == indietro){
+  Serial.println("indietro");
+  ruotaFR.write(150);
+  ruotaBR.write(150);
+  ruotaFL.write(40);
+  ruotaBL.write(40);
+  Serial.println("back");
+}
+
+else if (command == stop){
+  ruotaFR.write(90);
+  ruotaBR.write(90);
+  ruotaFL.write(90);
+  ruotaBL.write(90);
+  Serial.println("stop");
+}
+
+else if (command == destra){
+  ruotaFR.write(130);
+  ruotaBR.write(130);
+  ruotaFL.write(130);
+  ruotaBL.write(130);
+  Serial.println("turn right");
+}
+
+else if (command == sinistra){
+  ruotaFR.write(50);
+  ruotaBR.write(50);
+  ruotaFL.write(50);
+  ruotaBL.write(50);
+  Serial.println("turn left");
+}
+
+//else {
+//  Serial.println("comando non riconosciuto");
+//}
+delay(20);
+
+
+}
+
+
+}
+
+
+        </pre>
+    </div>
+</body>
+</html>
