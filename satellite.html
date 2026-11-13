@@ -3,65 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satellite Tracker | Livia Antonello</title>
+    <title>Satellite Antenna Tracking | Livia Antonello</title>
     <style>
-        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; --secondary: #94a3b8; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        :root { 
+            --bg: #f8f9fa; 
+            --text: #212529; 
+            --accent: #005A9C; 
+            --card-bg: #ffffff; 
+            --border: #e1e4e8;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 0; 
+        }
+        header { 
+            background: var(--card-bg); 
+            padding: 3rem 2rem; 
+            border-bottom: 1px solid var(--border); 
+        }
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { margin: 0; font-size: 2.2rem; letter-spacing: -0.5px; color: var(--text); }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
         
-        header { padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 40px; }
-        .back-link { color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        h1 { font-size: 2.5rem; margin-top: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 2rem; }
+        
+        section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        h2 { color: var(--accent); margin-top: 0; border-bottom: 2px solid #f1f3f5; padding-bottom: 0.5rem; }
+        h3 { color: #333; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .tag { background: #f1f3f5; color: #495057; font-size: 0.85rem; padding: 0.3rem 0.8rem; border-radius: 12px; font-weight: 500; }
+        
+        ul { padding-left: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
 
-        .description-box { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 30px; }
-        .tag { display: inline-block; background: #38bdf820; color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; margin-right: 10px; margin-bottom: 10px; border: 1px solid var(--accent); }
-        
-        h2 { color: var(--accent); margin-top: 40px; }
-        .code-box { background: #000; color: #4ade80; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; border: 1px solid #22c55e33; position: relative; }
-        .code-label { position: absolute; top: 0; right: 20px; background: #334155; color: #fff; padding: 2px 10px; border-radius: 0 0 5px 5px; font-size: 0.7rem; text-transform: uppercase; }
-        
-        footer { text-align: center; padding: 40px 0; color: var(--secondary); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 50px; }
+        .code-box { 
+            background: #24292e; 
+            color: #e1e4e8; 
+            padding: 1.5rem; 
+            border-radius: 8px; 
+            overflow-x: auto; 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 0.85rem; 
+            border: 1px solid var(--border); 
+            position: relative; 
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .code-label { 
+            position: absolute; 
+            top: 0; 
+            right: 20px; 
+            background: #444d56; 
+            color: #fff; 
+            padding: 2px 10px; 
+            border-radius: 0 0 5px 5px; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            font-weight: bold;
+        }
+        code { background: #f1f3f5; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; color: var(--accent); }
+        .code-box code { background: none; color: inherit; padding: 0; }
     </style>
 </head>
 <body>
 
-<div class="container">
     <header>
-        <a href="index.html" class="back-link">← Back to Portfolio Home</a>
-        <h1>Raspberry Pi Satellite Tracking System</h1>
-        <div style="margin-top: 10px;">
-            <span class="tag">Raspberry Pi</span>
-            <span class="tag">Python</span>
-            <span class="tag">C++</span>
-            <span class="tag">Gpredict</span>
-            <span class="tag">TLE Processing</span>
-            <span class="tag">Servo Automation</span>
+        <div class="header-content">
+            <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+            <h1>Satellite Antenna Tracking Station</h1>
+            <div class="tags">
+                <span class="tag">Raspberry Pi</span>
+                <span class="tag">Python (Sockets)</span>
+                <span class="tag">C++ (pigpio)</span>
+                <span class="tag">Gpredict</span>
+                <span class="tag">Embedded Control</span>
+            </div>
         </div>
     </header>
 
-    <section class="description-box">
-        <h2>Project Overview</h2>
-        <p>
-            I developed a satellite tracking system using a <strong>Raspberry Pi</strong> to automate a servo-mechanism. 
-            The system solves a common challenge in amateur radio: professional rotators are extremely expensive.
-        </p>
-        <p>
-            The TLEs (Two-Line Elements) are retrieved from <strong>Gpredict</strong> via custom Python code. Since Gpredict is designed to communicate only with official rotators, I developed a software interface that emulates the expected hardware protocol, allowing the software to "see" my system as a standard rotator.
-        </p>
-        <p>
-            A dedicated <strong>C++ backend</strong> receives the TLE data from the Python bridge and executes real-time PWM control for the servos. The system manages the entire trajectory across the skyline, from AOS (Acquisition of Signal) to LOS (Loss of Signal).
-        </p>
-    </section>
-
-    
-
-    <section>
-        <h2>Software Implementation</h2>
+    <div class="container">
         
-        <div class="code-box">
-            <div class="code-label">Python (Bridge)</div>
-            <pre>
-import socket
+        <section>
+            <h2>1. Architecture & Data Flow</h2>
+            <p>This project implements an automated, low-cost satellite tracking system for ground station antennas utilizing a <strong>Raspberry Pi</strong>. It bridges professional satellite tracking software (<strong>Gpredict</strong>) with DIY servo hardware to track satellites across the skyline from Acquisition of Signal (AOS) to Loss of Signal (LOS).</p>
+            <ul>
+                <li><strong>Gpredict Interface (Python):</strong> Gpredict is designed to interface exclusively with commercial, expensive antenna rotators. To bypass this, I developed a Python TCP server that emulates the <code>rotctld</code> minimal protocol. Gpredict connects to this socket, believing it is communicating with standard hardware, and continuously streams Two-Line Element (TLE) tracking data (Azimuth and Elevation).</li>
+                <li><strong>Data Exchange:</strong> The Python bridge parses the incoming <code>P &lt;azimuth&gt; &lt;elevation&gt;</code> commands, extracts the target coordinates, and writes them to a local buffer file (<code>last_command.txt</code>) to decoupled the network layer from the hardware control layer.</li>
+                <li><strong>Hardware Actuation (C++):</strong> A dedicated C++ backend continuously reads the updated coordinates. It applies mathematical transformations to map the 0-360° azimuth target to the 0-180° physical constraints of the servo, converts the angle into the corresponding Pulse Width Modulation (PWM) signal (in microseconds), and directly drives the GPIO pins via the <code>pigpio</code> library.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Implementation Details</h2>
+            
+            <h3>Python Rotator Bridge</h3>
+            <p>This script establishes the TCP server, listens on port 4533, and translates the standard <code>rotctld</code> commands into actionable coordinates for the hardware layer.</p>
+            
+            <div class="code-box">
+                <div class="code-label">Python</div>
+                <pre><code>import socket
 
 HOST = "0.0.0.0"
 PORT = 4533
@@ -69,7 +131,7 @@ PORT = 4533
 azimuth = 0.0
 elevation = 0.0
 
-print(f"[INFO] Rotator TCP server avviato su {HOST}:{PORT} (protocollo rotctld minimal)")
+print(f"[INFO] Rotator TCP server started on {HOST}:{PORT} (minimal rotctld protocol)")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -78,7 +140,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
 
     while True:
         conn, addr = server.accept()
-        print(f"[INFO] Connessione da {addr}")
+        print(f"[INFO] Connection from {addr}")
         with conn:
             while True:
                 try:
@@ -98,17 +160,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                             _, az_str, el_str = command.split()
                             azimuth = float(az_str)
                             elevation = float(el_str)
-                            print(f"[INFO] Puntamento aggiornato: AZ={azimuth}, EL={elevation}")
+                            print(f"[INFO] Tracking updated: AZ={azimuth}, EL={elevation}")
 
-                            # ? Aggiorna file in tempo reale
+                            # Update real-time buffer for C++ backend
                             with open("last_command.txt", "w") as f:
                                 f.write(f"{azimuth:.2f},{elevation:.2f}\n")
-                            with open("log_comandi.csv", "a") as log:
+                            with open("log_commands.csv", "a") as log:
                                 log.write(f"{azimuth:.2f},{elevation:.2f}\n")
 
                             conn.sendall(b"RPRT 0\n")
                         except Exception as e:
-                            print(f"[ERRORE PARSE]: {e}")
+                            print(f"[PARSE ERROR]: {e}")
                             conn.sendall(b"RPRT -1\n")
 
                     elif command.upper() == 'S':
@@ -118,43 +180,43 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                         conn.sendall(b"rotctld LiviaPi 0.1\n")
 
                     elif command.lower() == 'q':
-                        print("[INFO] Chiusura richiesta da client")
+                        print("[INFO] Closure requested by client")
                         break
 
                     else:
                         conn.sendall(b"RPRT -1\n")
-                        print(f"[IGNORATO] Comando sconosciuto: {command}")
+                        print(f"[IGNORED] Unknown command: {command}")
 
                 except Exception as e:
-                    print(f"[ERRORE CONNESSIONE]: {e}")
-                    break
-            </pre>
-        </div>
+                    print(f"[CONNECTION ERROR]: {e}")
+                    break</code></pre>
+            </div>
 
-        <div class="code-box">
-            <div class="code-label">C++ (Servo Control)</div>
-            <pre>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <pigpio.h>
-#include <unistd.h>
-#include <cmath>
-#include <chrono>
-#include <thread>
+            <h3>C++ Servo Controller</h3>
+            <p>This daemon reads the real-time buffer, maps the 360-degree target to a 180-degree physical servo limit, applies a deadband tolerance to eliminate mechanical jitter, and outputs the necessary PWM signal.</p>
+            
+            <div class="code-box">
+                <div class="code-label">C++</div>
+                <pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include &lt;pigpio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;cmath&gt;
+#include &lt;chrono&gt;
+#include &lt;thread&gt;
 
 using namespace std;
 
-// ---------- Parametri servo ----------
+// ---------- Servo Parameters ----------
 static const int SERVO_GPIO = 18;
-// Range tipico: 1000?2000 us. Se il tuo servo supporta 500?2500, aggiorna qui.
 static const int SERVO_MIN_US = 1000;
 static const int SERVO_MAX_US = 2000;
 
-// Deadband per ridurre aggiornamenti inutili (in gradi)
+// Deadband to reduce jitter (in degrees)
 static const double ANGLE_TOL = 0.6;
 
-// ---------- Utility ----------
+// ---------- Utilities ----------
 bool readSatelliteData(const string& filename, double& az, double& el) {
     ifstream file(filename);
     if (!file.is_open()) return false;
@@ -174,51 +236,51 @@ bool readSatelliteData(const string& filename, double& az, double& el) {
     return true;
 }
 
-// Converte gradi [0..180] -> microsecondi per pigpio
+// Converts degrees [0..180] -> microseconds for pigpio
 int angleToPulseWidth(double angleDeg) {
     if (angleDeg < 0)   angleDeg = 0;
     if (angleDeg > 180) angleDeg = 180;
     double ratio = angleDeg / 180.0;
-    int us = static_cast<int>(SERVO_MIN_US + ratio * (SERVO_MAX_US - SERVO_MIN_US));
+    int us = static_cast&lt;int&gt;(SERVO_MIN_US + ratio * (SERVO_MAX_US - SERVO_MIN_US));
     return us;
 }
 
-// Normalizza azimuth 0..360 e mappa a 0..180 (servo half-turn).
+// Normalizes azimuth 0..360 and maps to 0..180 (servo half-turn).
 double mapAzToServo180(double azDeg) {
-    // porta in [0,360)
+    // constrain to [0,360)
     double a = fmod(azDeg, 360.0);
     if (a < 0) a += 360.0;
 
-    // mappa in [0,180]: 0..180 -> stesso angolo; 180..360 -> angolo-180 (wrap)
+    // map to [0,180]: 0..180 -> same angle; 180..360 -> angle-180 (wrap)
     if (a <= 180.0) return a;
     return a - 180.0;
 }
 
 int main() {
     if (gpioInitialise() < 0) {
-        cerr << "Errore inizializzazione pigpio.\n";
+        cerr << "pigpio initialization failed.\n";
         return 1;
     }
 
-    const string filename = "/home/polispacegs/last_command.txt";
+    const string filename = "last_command.txt";
 
-    // Porta il servo in posizione neutra (90°) all?avvio
+    // Set servo to neutral position (90°) at startup
     gpioServo(SERVO_GPIO, angleToPulseWidth(90.0));
 
     double az = 0.0, el = 0.0;
-    double lastCmdAngle = -1.0; // invalido per forzare primo set
+    double lastCmdAngle = -1.0; // invalid to force first set
 
     while (true) {
         if (!readSatelliteData(filename, az, el)) {
-            // Se non riesco a leggere, mantengo la posizione attuale
+            // If read fails, maintain current position
             this_thread::sleep_for(chrono::milliseconds(200));
             continue;
         }
 
-        // Con servo 180° seguiamo direttamente la posizione target
+        // Direct follow using half-turn mapping
         double targetAngle = mapAzToServo180(az);
 
-        // Evita comandi se la variazione è piccola (jitter)
+        // Filter small variations (jitter)
         if (lastCmdAngle < 0 || fabs(targetAngle - lastCmdAngle) > ANGLE_TOL) {
             int pw = angleToPulseWidth(targetAngle);
             gpioServo(SERVO_GPIO, pw);
@@ -235,17 +297,10 @@ int main() {
 
     gpioTerminate();
     return 0;
-}
+}</code></pre>
+            </div>
+        </section>
 
-
-            </pre>
-        </div>
-    </section>
-
-    <footer>
-        <p>Satellite Tracking Project | Livia Antonello © 2026</p>
-    </footer>
-</div>
-
+    </div>
 </body>
 </html>
