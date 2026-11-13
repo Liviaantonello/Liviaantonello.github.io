@@ -3,40 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livia Antonello | Portfolio</title>
+    <title>Livia Antonello - Portfolio</title>
     <style>
-        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
-        .container { max-width: 1000px; margin: auto; padding: 40px 20px; text-align: center; }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: #94a3b8; font-size: 1.2rem; margin-bottom: 50px; }
-        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .nav-card { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid #334155; text-decoration: none; color: white; transition: 0.3s; }
-        .nav-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
-        .nav-card h2 { color: var(--accent); margin-top: 0; }
-        footer { padding: 40px; color: #64748b; font-size: 0.9rem; margin-top: auto; }
+        :root { 
+            --bg: #f8f9fa; 
+            --text: #212529; 
+            --accent: #005A9C; 
+            --card-bg: #ffffff; 
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 0; 
+        }
+        header { 
+            background: var(--card-bg); 
+            padding: 4rem 2rem; 
+            text-align: center; 
+            border-bottom: 1px solid #e1e4e8; 
+        }
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.5px; }
+        p.subtitle { color: #586069; font-size: 1.2rem; margin-top: 0.5rem; }
+        
+        .links { margin-top: 1.5rem; }
+        .links a { 
+            margin: 0 10px; 
+            font-weight: 500; 
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border: 1px solid #e1e4e8;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .links a:hover { 
+            background: var(--text); 
+            color: #fff; 
+            text-decoration: none; 
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .intro { margin-bottom: 3rem; font-size: 1.1rem; color: #444; }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+        }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid #e1e4e8; 
+            border-radius: 8px; 
+            padding: 1.5rem; 
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+        }
+        .card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06); 
+        }
+        .card h3 { margin-top: 0; margin-bottom: 0.5rem; color: var(--accent); }
+        .card p { color: #586069; font-size: 0.95rem; flex-grow: 1; }
+        
+        .tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            margin-top: 1rem; 
+            margin-bottom: 1rem;
+        }
+        .tag { 
+            background: #f1f3f5; 
+            color: #495057;
+            font-size: 0.8rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 12px; 
+            font-weight: 500;
+        }
+        
+        a.project-link { 
+            color: var(--accent); 
+            text-decoration: none; 
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        a.project-link:hover { text-decoration: underline; }
+        
+        .wip { color: #d73a49; font-style: italic; font-size: 0.85rem; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <header>
         <h1>Livia Antonello</h1>
-        <p class="subtitle">Electronics & Control Systems | Embedded Developer</p>
+        <p class="subtitle">MSc Student in Automation and Control Engineering @ Politecnico di Milano</p>
+        <div class="links">
+            <a href="mailto:liviaantonello003@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/livia-antonello-8289b5294" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Liviaantonello" target="_blank">GitHub</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h2>Engineering Portfolio</h2>
+            <p>Electrical Engineering graduate currently pursuing an MSc in Automation and Control Engineering. My work focuses on electromechanical modelling, software-hardware integration, robotics, and power system control.</p>
+        </div>
         
-        <div class="nav-grid">
-            <a href="macchina.html" class="nav-card">
-                <h2>🏎️ Arduino RC Car</h2>
-                <p>Bluetooth Control & Autonomous Obstacle Avoidance.</p>
-            </a>
-            <a href="satellite.html" class="nav-card">
-                <h2>🛰️ Satellite Tracker</h2>
-                <p>Python Bridge & C++ Real-time Servo Tracking.</p>
-            </a>
-            <a href="simulink.html" class="nav-card">
-                <h2>📊 Simulink Models</h2>
-                <p>Control Theory, PID Tuning & System Simulations.</p>
-            </a>
+        <div class="grid">
+            
+            <!-- ROS 2 Project -->
+            <div class="card">
+                <h3>RoverTech - Robotic Manipulation</h3>
+                <p>Developing panel-interaction functionalities in simulation. Integrating RGB-D sensing, ArUco-based localization, and motion planning for a robotic manipulator.</p>
+                <div class="tags">
+                    <span class="tag">ROS 2</span>
+                    <span class="tag">Gazebo</span>
+                    <span class="tag">MoveIt 2</span>
+                </div>
+                <a href="#" class="project-link">Simulation Docs & Demos &rarr;</a>
+            </div>
+
+            <!-- ACAV -->
+            <div class="card">
+                <h3>Autonomous Vehicle Control</h3>
+                <span class="wip">[Work in Progress]</span>
+                <p>Developing a simulated autonomous vehicle for track following. Investigating Convolutional Neural Networks (CNN) for steering and acceleration commands.</p>
+                <div class="tags">
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Webots</span>
+                    <span class="tag">Vehicle Dynamics</span>
+                </div>
+                <a href="#" class="project-link">View Architecture &rarr;</a>
+            </div>
+
+            <!-- ESTUN -->
+            <div class="card">
+                <h3>Industrial Robotics - ESTUN</h3>
+                <p>Camera-assisted pick-and-place application integrating image-based localization and an ESTUN robotic arm via socket communication.</p>
+                <div class="tags">
+                    <span class="tag">Machine Vision</span>
+                    <span class="tag">Sockets</span>
+                    <span class="tag">Automation</span>
+                </div>
+                <a href="#" class="project-link">System Architecture & Workspace &rarr;</a>
+            </div>
+
+            <!-- Antenna -->
+            <div class="card">
+                <h3>Satellite Antenna Tracking</h3>
+                <p>Raspberry Pi-based ground station tracking system. Emulated the rotator controller expected by Gpredict in Python and translated coordinates in C++.</p>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Embedded Systems</span>
+                </div>
+                <!-- Lascia il tuo vecchio link se avevi creato la pagina satellite.html -->
+                <a href="satellite.html" class="project-link">View Source Code &rarr;</a>
+            </div>
+
+            <!-- Tractor & Powertrain -->
+            <div class="card">
+                <h3>EV Powertrain & Tractor Modelling</h3>
+                <p>MATLAB-based dynamic models for an electric agricultural tractor and EV powertrain sizing, including V/f control strategies and WLTP energy consumption.</p>
+                <div class="tags">
+                    <span class="tag">MATLAB / Simulink</span>
+                    <span class="tag">Electric Drives</span>
+                    <span class="tag">FEM</span>
+                </div>
+                <a href="#" class="project-link">Technical Reports [PDF] &rarr;</a>
+            </div>
+
+            <!-- Labs -->
+            <div class="card">
+                <h3>Electrical Machines Lab</h3>
+                <p>Experimental parameter identification, characterization, and Simulink validation for DC machines, induction motors, synchronous machines, and transformers.</p>
+                <div class="tags">
+                    <span class="tag">Experimental Testing</span>
+                    <span class="tag">Data Analysis</span>
+                </div>
+                <a href="#" class="project-link">Experimental Reports [IT] &rarr;</a>
+            </div>
+
         </div>
     </div>
-    <footer>© 2026 Livia Antonello | Built with Code</footer>
+
 </body>
 </html>
