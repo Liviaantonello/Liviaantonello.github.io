@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,7 +79,7 @@
 
     <header>
         <div class="header-content">
-            <a href="index.html" class="back-link">&larr; Torna al Portfolio</a>
+            <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
             <h1>RoverTech - Robotic Manipulation & Perception</h1>
             <div class="tags">
                 <span class="tag">ROS 2 Humble</span>
@@ -96,17 +96,17 @@
         <!-- 1. Mission Overview -->
         <section>
             <h2>1. Mission Overview & Constraints</h2>
-            <p>Sviluppo di un sistema per l'interazione autonoma di un manipolatore robotico con un pannello di controllo, progettato per l'<strong>European Rover Challenge (ERC)</strong>.</p>
+            <p>Development of an autonomous interaction system for a robotic manipulator with a control panel, designed for the <strong>European Rover Challenge (ERC)</strong>.</p>
             <ul>
-                <li><strong>Vincoli di gara:</strong> Assenza di sistemi GPS/RTK. Il rover deve affidarsi esclusivamente alla percezione locale e all'odometria.</li>
-                <li><strong>Obiettivo:</strong> Identificare visivamente il pannello, calcolarne la posa 3D esatta e pianificare il movimento del braccio per azionare leve e interruttori (main switch) in completa autonomia.</li>
+                <li><strong>Competition Constraints:</strong> No GPS/RTK systems allowed. The rover must rely exclusively on local perception and odometry.</li>
+                <li><strong>Objective:</strong> Visually identify the panel, calculate its exact 3D pose, and plan the arm's movement to operate levers and switches (main switch) fully autonomously.</li>
             </ul>
         </section>
 
         <!-- 2. System Architecture -->
         <section>
             <h2>2. System Architecture</h2>
-            <p>L'architettura del sistema integra la simulazione fisica con il framework ROS 2, passando per l'elaborazione visiva (OpenCV) fino alla pianificazione del movimento (MoveIt 2).</p>
+            <p>The system architecture integrates physical simulation with the ROS 2 framework, routing visual data processing (OpenCV) through to motion planning (MoveIt 2).</p>
             
             <div class="diagram-container">
                 <div class="mermaid">
@@ -136,32 +136,32 @@
         <!-- 3. Perception -->
         <section>
             <h2>3. Perception & Pose Estimation</h2>
-            <p>Il sistema visivo si basa su una camera <strong>Orbbec Gemini 305</strong> montata in prossimità dell'end-effector (URDF/Xacro) per ottimizzare la visuale del pannello senza generare singolarità cinematiche.</p>
+            <p>The visual system relies on an <strong>Orbbec Gemini 305</strong> camera mounted near the end-effector (configured via URDF/Xacro) to optimize the panel's view without generating kinematic singularities.</p>
             <ul>
-                <li><strong>Rilevamento ArUco:</strong> Integrazione di 2 marker (DICT_5X5_250) sulla superficie del pannello simulato in Gazebo (tramite texture PBR).</li>
-                <li><strong>Stima della posa (solvePnP):</strong> Un nodo Python sottoscritto ai topic RGB estrae 8 corrispondenze 3D-2D. Sfruttando i parametri intrinseci della camera, calcola la trasformazione del pannello rispetto al frame ottico.</li>
-                <li><strong>Validazione di Profondità:</strong> La geometria nota in URDF fornisce la posizione nominale degli interruttori. I dati depth (RGB-D) confermano la reale distanza, raffinando il target per l'end-effector.</li>
+                <li><strong>ArUco Detection:</strong> Integration of 2 markers (DICT_5X5_250) on the Gazebo simulated panel surface (via PBR textures).</li>
+                <li><strong>Pose Estimation (solvePnP):</strong> A Python node subscribed to RGB topics extracts eight 3D-2D correspondences. Leveraging the camera's intrinsic parameters, it calculates the panel's transformation relative to the optical frame.</li>
+                <li><strong>Depth Validation:</strong> The known URDF geometry provides the nominal position of the switches. Depth data (RGB-D) confirms the actual distance, refining the target coordinates for the end-effector.</li>
             </ul>
         </section>
 
         <!-- 4. Planning -->
         <section>
             <h2>4. Motion Planning & Control</h2>
-            <p>La posa calcolata viene comunicata al sistema di navigazione tramite TF2. Il sistema gestisce le differenze tra tempo simulato (<code>/clock</code>) e tempo reale per evitare errori di <em>extrapolation</em> nella trasformazione dei frame.</p>
+            <p>The calculated pose is broadcasted to the navigation system via TF2. The system handles discrepancies between simulated time (<code>/clock</code>) and real time to prevent <em>extrapolation</em> errors in frame transformations.</p>
             <ul>
-                <li><strong>MoveIt 2 & OMPL:</strong> Generazione delle traiettorie per il raggiungimento del target. Il sistema risolve la cinematica inversa (IK) tenendo conto degli offset fisici tra il polso (<code>ee_base</code>) e le dita della pinza (<code>ee_finger1</code>).</li>
-                <li><strong>Pre-Approach:</strong> Implementazione di una traiettoria automatica di avvicinamento sicuro, stabilizzando l'end-effector a 8 cm dal <em>main switch</em> per preparare l'interazione finale.</li>
+                <li><strong>MoveIt 2 & OMPL:</strong> Trajectory generation to reach the target. The system solves inverse kinematics (IK) accounting for the physical offsets between the wrist base (<code>ee_base</code>) and the gripper fingers (<code>ee_finger1</code>).</li>
+                <li><strong>Pre-Approach Phase:</strong> Implementation of an automated safe approach trajectory, stabilizing the end-effector 8 cm away from the <em>main switch</em> to prepare for the final physical interaction.</li>
             </ul>
         </section>
 
         <!-- 5. Status -->
         <section>
             <h2>5. Current Status & Next Steps</h2>
-            <p>L'intera pipeline dal rilevamento visivo al pre-avvicinamento autonomo è stata validata con successo in Gazebo. I pacchetti sorgente compilano correttamente e l'architettura è distribuibile.</p>
-            <p><strong>Fasi successive:</strong></p>
+            <p>The entire pipeline, from visual detection to autonomous pre-approach, has been successfully validated in Gazebo. The source packages compile correctly, and the architecture is ready for deployment.</p>
+            <p><strong>Next Steps:</strong></p>
             <ul>
-                <li>Raffinamento del movimento di contatto finale (Final Approach).</li>
-                <li>Gestione dinamica delle collisioni durante la pressione dell'interruttore.</li>
+                <li>Refinement of the final contact motion (Final Approach).</li>
+                <li>Dynamic collision management during the physical switch actuation.</li>
             </ul>
         </section>
 
